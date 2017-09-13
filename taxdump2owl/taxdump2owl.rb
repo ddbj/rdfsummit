@@ -535,6 +535,16 @@ END_OF_ONTOLOGY
     end
   end
 
+  class Division
+    attr_reader :id, :code, :name, :comments
+
+    def initialize(id, code, name, comments)
+      @id = id
+      @code = code
+      @name = name
+      @comments = comments
+    end
+  end
 
   class Parser
     def initialize(filename)
@@ -600,17 +610,31 @@ END_OF_ONTOLOGY
     end
   end
 
+  ## taxdump/division.dmp
+
+  class DivisionParser < Parser
+    def parse
+      File.open(@filename).each do |line|
+        division_id, division_code, division_name, comments, = *dmp_split(line)
+        division = Division.new(division_id, division_code, division_name, comments)
+        @hash[division_id] = division
+      end
+    end
+  end
+
   ## taxdump/nodes.dmp
 
   class TaxdumpParser < Parser
     include TurtleHelper
 
-    def initialize(hash = {:nodes => "nodes.dmp", :names => "names.dmp", :merged => "merged.dmp", :citations => "citations.dmp"})
+    def initialize(hash = {:nodes => "nodes.dmp", :names => "names.dmp", :merged => "merged.dmp", :citations => "citations.dmp", :division => "division.dmp"})
       ONTOLOGY.sub!("@@VERSION_INFO@@", File.mtime(hash[:nodes]).strftime('%Y-%m-%d'))
       output_header
       @citations = CitationsParser.new(hash[:citations])
       @merged = MergedParser.new(hash[:merged])
       @names = NamesParser.new(hash[:names])
+      @division = DivisionParser.new(hash[:division])
+      p @division
       super(hash[:nodes])
     end
 
@@ -642,6 +666,9 @@ END_OF_ONTOLOGY
         ## extensions for private-ftp taxdump
         puts triple(tax, ":geneticCodePt", ":GeneticCode#{plastid_genetic_code_id}") if plastid_genetic_code_id.to_i > 0 
         puts triple(tax, ":formalNameIndicator", "#{formal_name_indicator.to_i == 1 ? 'true' : 'false'}") if formal_name_indicator
+        ## extensions for GenBank
+        puts triple(tax, ":genbank_division", "#{@division[division_id].code}")
+        puts triple(tax, ":genbank_hidden_flag", "#{genbank_hidden_flag.to_i == 1 ? true : false}")
 
         if @names[tax_id]
           @names[tax_id].each do |name|
@@ -681,12 +708,14 @@ nodes_dmp = ARGV.shift || "taxdump/nodes.dmp"
 names_dmp = ARGV.shift || "taxdump/names.dmp"
 merged_dmp = ARGV.shift || "taxdump/merged.dmp"
 citations_dmp = ARGV.shift || "taxdump/citations.dmp"
+division_dmp = ARGV.shift || "taxdump/division.dmp"
 
 TaxonomyOntology::TaxdumpParser.new(
   :nodes => nodes_dmp,
   :names => names_dmp,
   :merged => merged_dmp,
-  :citations => citations_dmp
+  :citations => citations_dmp,
+  :division => division_dmp
 )
 
 
