@@ -168,6 +168,9 @@ class INSDC2RDF
     case @datasource
     when /RefSeq/i
       @entry_prefix = "http://identifiers.org/refseq/"
+    when /^(http:\/\/.+)/i
+      #@entry_prefix = "http://dfast.nig.ac..jp/resource/"
+      @entry_prefix = "#{$1}#"
     else # /INSDC|GenBank|ENA|DDBJ/i
       @entry_prefix = "http://identifiers.org/insdc/"
     end
@@ -362,7 +365,14 @@ class INSDC2RDF
     @sequence_uri = "<#{@sequence_id}#sequence>"
     @entry_uri = "<#{@sequence_id}>"
 
-    puts triple(@entry_uri, "rdf:type", "insdc:Entry")
+    #puts triple(@entry_uri, "rdf:type", "insdc:Entry")
+    case @datasource
+    when /http:\/\//i
+      puts triple(@entry_uri, "rdf:type", "insdc:YetAnotherEntry")
+    else # /INSDC|GenBank|ENA|DDBJ|RefSeq/i
+      puts triple(@entry_uri, "rdf:type", "insdc:Entry")
+    end
+
 
     # [TODO] obtain rdfs:label from source /chromosome (eukaryotes) /plasmid (prokaryotes) -> see insdc:source_chromosome, insdc:source_plasmid
     sequence_label(@entry.definition)
@@ -455,9 +465,11 @@ class INSDC2RDF
     puts triple(@entry_uri, "insdc:sequence", @sequence_uri)
     # [TODO] where to obtain the actual DNA sequence? in what format?
     #puts triple(@sequence_uri, "rdfs:seeAlso", "<http://togows.org/entry/nucleotide/#{entry_id}.fasta>")
-    puts triple(@sequence_uri, "rdfs:seeAlso", "<http://www.ncbi.nlm.nih.gov/nuccore/#{entry_id}?report=fasta>")
     case @datasource
+    when /RefSeq/i
+      puts triple(@sequence_uri, "rdfs:seeAlso", "<http://www.ncbi.nlm.nih.gov/nuccore/#{entry_id}?report=fasta>")
     when /INSDC|GenBank|ENA|DDBJ/i
+      puts triple(@sequence_uri, "rdfs:seeAlso", "<http://www.ncbi.nlm.nih.gov/nuccore/#{entry_id}?report=fasta>")
       #puts triple(@sequence_uri, "rdfs:seeAlso", "<http://togows.org/entry/embl/#{entry_id}.fasta>")
       puts triple(@sequence_uri, "rdfs:seeAlso", "<http://www.ebi.ac.uk/ena/data/view/#{entry_id}&display=fasta>")
       #puts triple(@sequence_uri, "rdfs:seeAlso", "<http://togows.org/entry/ddbj/#{entry_id}.fasta>")
