@@ -34,9 +34,10 @@ class AssemblyReports2RDF
 
   attr_accessor :status
 
-  def initialize input,output 
+  def initialize input,output,input_list 
     @root_path = input 
     @out_path  = output
+    @filters  = set_filters input_list
     @status = Hash.new{|h,k|h[k]=0}
     #output_prefix f
     @paths =[]
@@ -52,6 +53,21 @@ class AssemblyReports2RDF
        #puts path
        output_each_assembly path
     end
+  end
+
+  def set_filters list_path
+     filters = []
+     if File.exist?(list_path) 
+       File.readlines(list_path, :encoding =>'UTF-8').each do |line|
+          next if line =~/^#/
+          id = line.strip.match(/(GCA|GCF)\_\d+\.\d+/)
+          filters.push(id.to_s) 
+       end
+     end
+     warn "### FILTER: #{filters.size} record(s), [#{filters.join(',')}]" unless filters.empty?
+
+
+     filters
   end
 
   def datasets
@@ -161,7 +177,7 @@ class AssemblyReports2RDF
       output_prefix f
 
       #@reports.first(5).each do |project|
-      @reports.each do |project|
+      @reports.select { |p| @filters.empty? || @filters.include?(p['assembly_accession']) }.each do |project|
         base_path = project['ftp_path'].sub('ftp://ftp.ncbi.nlm.nih.gov/', '')
         #basename = File.basename(base_path)
         subject = "http://ddbj.nig.ac.jp/#{base_path}"
@@ -355,5 +371,6 @@ end
 
 input = ARGV.shift
 output= ARGV.shift
+input_list = ARGV.shift || ''
 
-AssemblyReports2RDF.new(input,output)
+AssemblyReports2RDF.new(input,output,input_list)
