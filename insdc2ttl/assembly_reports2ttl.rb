@@ -203,7 +203,7 @@ class AssemblyReports2RDF
           output_pv(k,v,f)
         end
         #puts "\trdfs:seeAlso\t<http://www.ncbi.nlm.nih.gov/assembly/#{project[' assembly_accession']}> ;"
-        f.puts "\trdfs:seeAlso\tasm:#{project['assembly_accession']} ."
+        f.puts "\trdfs:seeAlso\t<http://www.ncbi.nlm.nih.gov/assembly/#{project['assembly_accession']}> ."
         f.puts
         #puts "\trdfs:seeAlso\tftp://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/All/#{project[' assembly_accession']}.assembly.txt ;"
 
