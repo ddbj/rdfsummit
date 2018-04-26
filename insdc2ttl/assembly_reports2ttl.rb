@@ -139,6 +139,7 @@ class AssemblyReports2RDF
           # Sequence-Name Sequence-Role   Assigned-Molecule       Assigned-Molecule-Location/Type GenBank-Accn    Relationship    RefSeq-Accn     Assembly-Unit
           sequence_name, sequence_role, assigned_molecule, assigned_molecule_location_type, genbank_accession, relationship, refseq_accession, assembly_unit =  line.strip.split("\t")
           f.puts "\t\tasm:sequence\t["
+          f.puts "\t\trdf:type\tasm:Sequence ;"
           f.puts "\t\tasm:sequence_name\t#{quote(sequence_name)} ;"
           f.puts "\t\tasm:sequence_role\t#{quote(sequence_role)} ;"
           f.puts "\t\tasm:assigned_molecule\t#{quote(assigned_molecule)} ;"
