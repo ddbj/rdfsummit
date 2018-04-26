@@ -34,10 +34,11 @@ class AssemblyReports2RDF
 
   attr_accessor :status
 
-  def initialize input,output,input_list 
+  def initialize input,output,input_list,fetch 
     @root_path = input 
     @out_path  = output
     @filters  = set_filters input_list
+    @fetch = fetch
     @status = Hash.new{|h,k|h[k]=0}
     #output_prefix f
     @paths =[]
@@ -51,6 +52,7 @@ class AssemblyReports2RDF
     end
     @paths.each do |path|
        #puts path
+       fetch_each_assembly path if @fetch
        output_each_assembly path
     end
   end
@@ -98,6 +100,12 @@ class AssemblyReports2RDF
         @reports << head.zip(line.strip.split("\t")).inject({}){|h,col| h[col[0]]=col[1];h}
       end
     end
+  end
+
+  def fetch_each_assembly base_path
+    cmd =  "lftp -e 'open ftp://ftp.ncbi.nlm.nih.gov && mirror -P=2 -I *_assembly_stats.txt -I *_assembly_report.txt -n #{base_path} #{@root_path}/#{base_path} && exit'"
+    puts cmd
+    `#{cmd}`
   end
 
   def output_each_assembly base_path
@@ -372,5 +380,7 @@ end
 input = ARGV.shift
 output= ARGV.shift
 input_list = ARGV.shift || ''
+fetch = ARGV.shift ? true : false
+puts fetch
 
-AssemblyReports2RDF.new(input,output,input_list)
+AssemblyReports2RDF.new(input,output,input_list,fetch)
