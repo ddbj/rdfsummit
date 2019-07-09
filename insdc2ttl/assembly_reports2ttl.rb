@@ -62,11 +62,13 @@ class AssemblyReports2RDF
      if File.exist?(list_path) 
        File.readlines(list_path, :encoding =>'UTF-8').each do |line|
           next if line =~/^#/
+          #id = line.strip.match(/(GCA|GCF)\_\d+(\.\d+)?/)
           id = line.strip.match(/(GCA|GCF)\_\d+\.\d+/)
           filters.push(id.to_s) 
        end
      end
-     warn "### FILTER: #{filters.size} record(s), [#{filters.join(',')}]" unless filters.empty?
+     #warn "### FILTER: #{filters.size} record(s), [#{filters.join(',')}]" unless filters.empty?
+     warn "### FILTER: #{filters.size} record(s)" unless filters.empty?
 
 
      filters
@@ -114,6 +116,7 @@ class AssemblyReports2RDF
     subject = "http://ddbj.nig.ac.jp/#{base_path}"
     stats_filepath = "#{@root_path}/#{base_path}/#{basename}_assembly_stats.txt"
     report_filepath ="#{@root_path}/#{base_path}/#{basename}_assembly_report.txt"
+
     if FileTest.exist?(report_filepath) and FileTest.exist?(stats_filepath) 
       #out_file = "#{@out_path}/#{base_path}/#{basename}.ttl"
       out_dir  = "#{@out_path}/#{File.dirname(base_path)}"
@@ -126,6 +129,7 @@ class AssemblyReports2RDF
         f.puts
         f.puts "<#{subject}>"
         File.readlines(stats_filepath, :encoding =>'UTF-8').each_with_index do |line,i|
+puts line
           next if line =~/^#/
           unit_name, molecule_name, molecule_type_loc, sequence_type, statistic, value = line.strip.split("\t")
           if unit_name == 'all' and molecule_name == 'all' and  molecule_type_loc == 'all' and sequence_type == 'all'
@@ -133,11 +137,14 @@ class AssemblyReports2RDF
             f.puts "\t\tasm:#{statistic}\t#{value} ;"
           end
         end
-
+        @genbank_accs =[]
+        @refseq_accs =[]
         File.readlines(report_filepath, :encoding =>'UTF-8').each_with_index do |line,i|
           next if line =~/^#/
           # Sequence-Name Sequence-Role   Assigned-Molecule       Assigned-Molecule-Location/Type GenBank-Accn    Relationship    RefSeq-Accn     Assembly-Unit
           sequence_name, sequence_role, assigned_molecule, assigned_molecule_location_type, genbank_accession, relationship, refseq_accession, assembly_unit =  line.strip.split("\t")
+          @genbank_accs.push(genbank_accession)
+          @refseq_accs.push(refseq_accession)
           f.puts "\t\tasm:sequence\t["
           f.puts "\t\trdf:type\tasm:Sequence ;"
           f.puts "\t\tasm:sequence_name\t#{quote(sequence_name)} ;"
@@ -153,6 +160,12 @@ class AssemblyReports2RDF
           @status[assigned_molecule_location_type] += 1
         end
         f.puts "."
+        @genbank_accs.each do |acc|
+          f.puts "<http://identifiers.org/insdc/#{acc}>\trdfs:seeAlso\t<http://www.ncbi.nlm.nih.gov/nuccore/#{acc}>."
+        end
+        @refseq_accs.each do |acc|
+          f.puts "<http://identifiers.org/refseq/#{acc}>\trdfs:seeAlso\t<http://www.ncbi.nlm.nih.gov/nuccore/#{acc}>."
+        end
       end
     end
   end
@@ -162,13 +175,15 @@ class AssemblyReports2RDF
   end
 
   def output_prefix_common
-      "@prefix asm: <http://ddbj.nig.ac.jp/ontologies/assembly/> ."
+      "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+      @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+      @prefix asm: <http://ddbj.nig.ac.jp/ontologies/assembly/> ."
   end
 
   def output_prefix f
       f.puts output_prefix_common
-      f.puts "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ."
-      f.puts "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> ."
+      #f.puts "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ."
+      #f.puts "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> ."
       #puts "@prefix obo: <http://purl.obolibrary.org/obo/> ."
       f.puts "@prefix sio: <http://semanticscience.org/resource/> ."
       f.puts
@@ -187,6 +202,7 @@ class AssemblyReports2RDF
 
       #@reports.first(5).each do |project|
       @reports.select { |p| @filters.empty? || @filters.include?(p['assembly_accession']) }.each do |project|
+        pp project
         base_path = project['ftp_path'].sub('ftp://ftp.ncbi.nlm.nih.gov/', '')
         #basename = File.basename(base_path)
         subject = "http://ddbj.nig.ac.jp/#{base_path}"
@@ -382,6 +398,5 @@ input = ARGV.shift
 output= ARGV.shift
 input_list = ARGV.shift || ''
 fetch = ARGV.shift ? true : false
-puts fetch
 
 AssemblyReports2RDF.new(input,output,input_list,fetch)
