@@ -56,7 +56,7 @@ module RDFSupport
       triple("@prefix", "xsd:", "<http://www.w3.org/2001/XMLSchema#>"),
       triple("@prefix", "skos:", "<http://www.w3.org/2004/02/skos/core#>"),
       triple("@prefix", "sio:", "<http://semanticscience.org/resource/>"),
-      #triple("@prefix", "so:", "<http://purl.org/obo/owl/SO#>"),
+      triple("@prefix", "so:", "<http://purl.obolibrary.org/obo/so#>"),
       triple("@prefix", "obo:", "<http://purl.obolibrary.org/obo/>"),
       triple("@prefix", "faldo:", "<http://biohackathon.org/resource/faldo#>"),
     ]
@@ -286,7 +286,7 @@ class INSDC2RDF
       subpart_id = new_uuid
       subfeature_id = new_feature_uri(feature_type[:term], loc.from, loc.to, loc.strand)
 
-      #puts triple(subpart_id, "obo:so_part_of", region_id)
+      #puts triple(subpart_id, "obo:BFO_0000050", region_id)
       puts triple(subpart_id, "sio:SIO_000300", count) + "  # sio:has-value"
       puts triple(subpart_id, "sio:SIO_000628", subfeature_id) + "  # sio:refers-to"
       puts triple(subfeature_id, "rdf:type", "insdc:#{feature_type[:ft]}")
@@ -469,10 +469,10 @@ class INSDC2RDF
     case form
     when "linear"
       puts triple(@sequence_uri, "insdc:topology", "insdc:linear")
-      puts triple(@sequence_uri, "obo:so_has_quality", "obo:SO_0000987") + "  # SO:linear"
+      puts triple(@sequence_uri, "obo:RO_0000086", "obo:SO_0000987") + "  # SO:linear"
     when "circular"
       puts triple(@sequence_uri, "insdc:topology", "insdc:circular")
-      puts triple(@sequence_uri, "obo:so_has_quality", "obo:SO_0000988") + "  # SO:circular"
+      puts triple(@sequence_uri, "obo:RO_0000086", "obo:SO_0000988") + "  # SO:circular"
     end
   end
 
@@ -580,7 +580,7 @@ class INSDC2RDF
     from, to = locations.span
     @source_uri = new_feature_uri(@source.feature, from, to, locations.first.strand)
     #puts triple(@entry_uri, 'insdc:source', @source_uri)
-    puts triple(@source_uri, "obo:so_part_of", @sequence_uri)
+    puts triple(@source_uri, "obo:BFO_0000050", @sequence_uri)
 
     if hash["db_xref"]
       source_link(hash["db_xref"])
@@ -743,7 +743,7 @@ class INSDC2RDF
           puts triple(gene_id, "rdfs:subClassOf", @ft_so.obo_id(so_encoding_id)) + "  # SO:#{so_encoding_term}"
         end
       end
-      puts triple(feature_id, "obo:so_part_of", parent_uri)
+      puts triple(feature_id, "obo:BFO_0000050", parent_uri)
 
       # add FALDO location and subparts (exons etc.)
       region_id, locations = new_location(feature_id, position)
@@ -757,9 +757,9 @@ class INSDC2RDF
           feature_type = { :id => "obo:SO_0000001", :term => "region", :ft => "Feature" }
         end
         sub_parts, sub_ordered_parts = add_subparts(locations, feature_type)
-        #puts triple(feature_id, "obo:so_has_part", "(#{sub_parts.join(' ')})")  # rdf:List
+        #puts triple(feature_id, "obo:BFO_0000051", "(#{sub_parts.join(' ')})")  # rdf:List
         # exon URIs
-        puts triple(feature_id, "obo:so_has_part", sub_parts.join(', '))
+        puts triple(feature_id, "obo:BFO_0000051", sub_parts.join(', '))
         # part URIs
         puts triple(feature_id, "sio:SIO_000974", sub_ordered_parts.join(', ')) + "  # sio:has-ordered-part"
       #end
