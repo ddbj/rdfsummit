@@ -369,6 +369,54 @@ module TaxonomyOntology
 :Varietas
   a :Rank ;
   rdfs:label "varietas" .
+:Strain
+  a :Rank ;
+  rdfs:label "strain" .
+:Isolate
+  a :Rank ;
+  rdfs:label "isolate" .
+:Serotype
+  a :Rank ;
+  rdfs:label "serotype" .
+:Clade
+  a :Rank ;
+  rdfs:label "clade" .
+:FormaSpecialis
+  a :Rank ;
+  rdfs:label "forma specialis" .
+:Section
+  a :Rank ;
+  rdfs:label "section" .
+:Serogroup
+  a :Rank ;
+  rdfs:label "serogroup" .
+:Subsection
+  a :Rank ;
+  rdfs:label "subsection" .
+:Genotype
+  a :Rank ;
+  rdfs:label "genotype" .
+:Biotype
+  a :Rank ;
+  rdfs:label "biotype" .
+:Morph
+  a :Rank ;
+  rdfs:label "morph" .
+:Series
+  a :Rank ;
+  rdfs:label "series" .
+:Subvariety
+  a :Rank ;
+  rdfs:label "subvariety" .
+:Pathogroup
+  a :Rank ;
+  rdfs:label "pathogroup" .
+:Cohort
+  a :Rank ;
+  rdfs:label "cohort" .
+:Subcohort
+  a :Rank ;
+  rdfs:label "subcohort" .
 :DummyTaxon
   a owl:Class ;
   rdfs:subClassOf :Taxon ;
@@ -500,6 +548,22 @@ END_OF_ONTOLOGY
     "superphylum"           => "Superphylum",
     "tribe"                 => "Tribe",
     "varietas"              => "Varietas",
+    "strain"                => "Strain",
+    "isolate"               => "Isolate",
+    "serotype"              => "Serotype",
+    "clade"                 => "Clade",
+    "forma specialis"       => "FormaSpecialis",
+    "section"               => "Section",
+    "serogroup"             => "Serogroup",
+    "subsection"            => "Subsection",
+    "genotype"              => "Genotype",
+    "biotype"               => "Biotype",
+    "morph"                 => "Morph",
+    "series"                => "Series",
+    "subvariety"            => "Subvariety",
+    "pathogroup"            => "Pathogroup",
+    "cohort"                => "Cohort",
+    "subcohort"             => "Subcohort"
   }
 
   class Name
