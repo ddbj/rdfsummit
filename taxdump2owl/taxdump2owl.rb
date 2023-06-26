@@ -698,7 +698,6 @@ END_OF_ONTOLOGY
       @merged = MergedParser.new(hash[:merged])
       @names = NamesParser.new(hash[:names])
       @division = DivisionParser.new(hash[:division])
-      p @division
       super(hash[:nodes])
     end
 
