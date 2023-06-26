@@ -40,7 +40,7 @@ module RDFSupport
   end
 
   def quote(str)
-    return str.gsub('\\', '\\\\').gsub("\t", '\\t').gsub("\n", '\\n').gsub("\r", '\\r').gsub('"', '\\"').inspect
+    return str.to_s.gsub(/(\\|\t|\n|\r|")/, '\\' => '\\\\', "\t" => '\\t', "\n" => '\\n', "\r" => '\\r', '"' => '\\"').inspect
   end
 
   def triple(s, p, o)
@@ -63,7 +63,7 @@ module RDFSupport
   end
 
   def usdate2date(str)
-    return Date.parse(str).strftime("%Y-%m-%d")  
+    return Date.parse(str).strftime("%Y-%m-%d")
   end
 end
 
@@ -611,7 +611,7 @@ class INSDC2RDF
       vals.each do |val|
         if val == true
           puts triple(@source_uri, "insdc:#{qual}", true)
-        else        
+        else
           data = val.to_s.gsub(/\s+/, ' ').strip
           if data[/^\d+$/]
             puts triple(@source_uri, "insdc:#{qual}", data)
@@ -632,7 +632,7 @@ class INSDC2RDF
   def parse_genes
     genes = @features.select {|x| x.feature == "gene"}
     check = Hash.new(0)
-  
+
     genes.each do |gene|
       @feature_count[gene.feature] += 1
       locations = Bio::Locations.new(gene.position)
