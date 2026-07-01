@@ -88,6 +88,11 @@
     "class": "CDD",
     "prefix": "http://identifiers.org/cdd"
   },
+  "COG": {
+    "label": "Conserved Domain Database",
+    "class": "COG",
+    "prefix": "http://identifiers.org/cog"
+  },
   "EcoGene": {
     "label": "EcoGene",
     "class": "EcoGene",
@@ -181,11 +186,59 @@
    * NOT AVAILABLE IN Identifiers.org FOR NOW
    */
 
+  "Araport": {
+    "label": "Arabidopsis Information Portal",
+    "class": "Araport",
+    "prefix": "http://identifiers.org/araport"
+  },
+
+  "Axeldb": {
+    "label": "A Xenopus laevis database",  // custom
+    "class": "Axeldb",
+    "prefix": "http://identifiers.org/axeldb"
+  },
+
+  "BEEBASE": {
+    "label": "BeeBase",  // custom
+    "class": "BEEBASE",
+    "prefix": "http://identifiers.org/beebase"
+  },
+
+  "BEI": {
+    "label": "BEI Resources",  // custom
+    "class": "BEI",
+    "prefix": "http://identifiers.org/bei"
+  },
+
+  "dbSTS": {
+    "label": "STS database maintained at the NCBI",  // custom
+    "class": "dbSTS",
+    "prefix": "http://identifiers.org/dbsts"
+  },
+
   // http://www.ericbrc.org/portal/eric/
   "ERIC": {
     "label": "Euteropathogen Resource Integration Center",  // custom
     "class": "ERIC",
     "prefix": "http://identifiers.org/eric"
+  },
+
+  "FANTOM_DB": {
+    "label": "Database of Functional Annotation of Mouse", // custom
+    "class": "FANTOM_DB",
+    "prefix": "http://identifiers.org/gantomdb"
+  },
+
+  "Fungorum": {
+    "label": "Index Fungorum", // custom
+    "class": "Fungorum",
+    "prefix": "http://identifiers.org/fungorum"
+  },
+
+  "GDB": {
+    "label": "Human Genome Database accession numbers",  // custom
+    "class": "GDB",
+    "prefix": "http://identifiers.org/gdb"
   },
 
   "GI": {
@@ -200,6 +253,66 @@
     "label": "Human Microbiome Project",  // custom
     "class": "HMP",
     "prefix": "http://identifiers.org/hmp"
+  },
+
+  "IKMC": {
+    "label": "International Knockout Mouse Consortium", // custom
+    "class": "IKMC",
+    "prefix": "http://identifiers.org/ikmc"
+  },
+
+  "IMGT/GENE-DB": {
+    "label": "Immunogenetics database, immunoglobulin and T-cell receptor genes",  // custom
+    "class": "IMGT/GENE-DB",
+    "prefix": "http://identifiers.org/imgt.gene-db"
+  },
+
+  "IntrepidBio": {
+    "label": "Intrepid BioInformatics", // custom
+    "class": "IntrepidBio",
+    "prefix": "http://identifiers.org/intrepidbio"
+  },
+
+  "ISHAM-ITS": {
+    "label": "ITS reference database for pathogenic fungi", // custom
+    "class": "ISHAM-ITS",
+    "prefix": "http://identifiers.org/isham-its"
+  },
+
+  "MarpolBase": {
+    "label": "Genome Database for Marchantia polymorpha",
+    "class": "MarpolBase",
+    "prefix": "http://identifiers.org/marpolbase"
+  },
+
+  "NRESTdb": {
+    "label": "Natural Rubber EST database", // custom
+    "class": "NRESTdb",
+    "prefix": "http://identifiers.org/nrestdb"
+  },
+
+  "Osa1": {
+    "label": "Rice Genome Annotation Project", // custom
+    "class": "Osa1",
+    "prefix": "http://identifiers.org/osa1"
+  },
+
+  "PBmice": {
+    "label": "PiggyBac Mutagenesis Information Center", // custom
+    "class": "PBmice",
+    "prefix": "http://identifiers.org/pbmice"
+  },
+
+  "PGN": {
+    "label": "Plant Genome Network", // custom
+    "class": "PGN",
+    "prefix": "http://identifiers.org/pgn"
+  },
+
+  "PIR": {
+    "label": "Protein Information Resource accession numbers", // custom
+    "class": "PIR",
+    "prefix": "http://identifiers.org/pir"
   },
 
   "PSEUDO": {
@@ -222,6 +335,37 @@
     "class": "PseudoCap",
     "prefix": "http://identifiers.org/pseudocap"
   },
+
+  "RATMAP": {
+    "label": "Rat Genome Database",  // custom
+    "class": "RATMAP",
+    "prefix": "http://identifiers.org/ratmap"
+  },
+
+  "RiceGenes": {
+    "label": "Rice database accession numbers",  // custom
+    "class": "RiceGenes",
+    "prefix": "http://identifiers.org/ricegenes"
+  },
+
+  "RZPD": {
+    "label": "Resource Centre Primary Database Clone Identifiers",  // custom
+    "class": "RZPD",
+    "prefix": "http://identifiers.org/rzpd"
+  },
+
+  "SK-FST": {
+    "label": "Saskatoon Arabidopsis T-DNA mutant population",
+    "class": "SK-FST",
+    "prefix": "http://identifiers.org/sk-fst"
+  },
+
+  "UNILIB": {
+    "label": "Unified Library Database",  // custom
+    "class": "UNILIB",
+    "prefix": "http://identifiers.org/unilib/"
+  },
+
  /*
    * Add INSDC db_xref AVAILABLE IN Identifiers.org
    *  source:
@@ -250,11 +394,46 @@
     "prefix": "http://identifiers.org/antweb/"
   },
 
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000393
+  "APHIDBASE": {
+      "label": "Aphid Genome Database",
+      "class": "APHIDBASE",
+      "prefix": "http://identifiers.org/aphidbase.transcript/"
+  },
+
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000285
+  "BDGP_EST": {
+    "label": "Berkeley Drosophila Genome Project EST database",
+    "class": "BDGP_EST",
+    "prefix": "http://identifiers.org/bdgp.est/"
+  },
+
+  // http://www.ebi.ac.uk/miriam/main/collections/MIR:00000156
+  "BDGP_INS": {
+    "label": "Berkeley Drosophila Genome Project database — Insertion",
+    "class": "BDGP_INS",
+    "prefix": "http://identifiers.org/bdgp.insertion/"
+  },
+
   // http://www.ebi.ac.uk/miriam/main/collections/MIR:00000157
   "BEETLEBASE": {
     "label": "Tribolium Genome Database -- Insertion", 
     "class": "BEETLEBASE",
     "prefix": "http://identifiers.org/beetlebase/"
+  },
+
+  // http://www.ebi.ac.uk/miriam/main/collections/MIR:00000158
+  "BOLD": {
+    "label": "BOLD Barcode of Life database",
+    "class": "BOLD",
+    "prefix": "http://identifiers.org/bold.taxonomy/"
+  },
+
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000145
+  "CGD": {
+    "label": "Candida Genome Database",
+    "class": "CGD",
+    "prefix": "http://identifiers.org/cgd/"
   },
 
   // http://www.ebi.ac.uk/miriam/main/collections/MIR:00000159
@@ -306,6 +485,20 @@
     "prefix": "http://identifiers.org/gabi/"
   },
 
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000106
+  "GeneDB": {
+    "label": "Curated gene database for Schizosaccharomyces pombe, Leishmania major and Trypanosoma brucei",
+    "class": "GeneDB",
+    "prefix": "http://identifiers.org/genedb"
+  },
+
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000166
+  "GRIN": {
+    "label": "Germplasm Resources Information Network",
+    "class": "GRIN",
+    "prefix": "http://identifiers.org/grin.taxonomy"
+  },
+
   // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000168
   "H-InvDB": {
     "label": "H-Invitational Database", 
@@ -334,6 +527,13 @@
     "prefix": "http://identifiers.org/jcm/"
   },
 
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000733
+  "JGIDB": {
+    "label": "JGI Genome Portal", 
+    "class": "JGIDB",
+    "prefix": "http://identifiers.org/gold/"
+  },
+
   // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000177
   "MaizeGDB": {
     "label": "Maize Genome Database unique identifiers", 
@@ -348,11 +548,32 @@
     "prefix": "http://identifiers.org/mgd/"
   },
 
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000178
+  "MycoBank": {
+    "label": "Fungal Databases, Nomenclature and Species Banks",
+    "class": "MycoBank",
+    "prefix": "http://identifiers.org/mycobank/"
+  },
+
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000289
+  "NextDB": {
+      "label": "Nematode Expression Pattern DataBase",
+      "class": "NextDB",
+      "prefix": "http://identifiers.org/nextdb/"
+  },
+
   // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000305
   "niaEST": {
     "label": "NIA Mouse cDNA Project", 
     "class": "niaEST",
     "prefix": "http://identifiers.org/niaest/"
+  },
+
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000335
+  "Phytozome": {
+    "label": "Comparative genomics of plants", 
+    "class": "Phytozome",
+    "prefix": "http://identifiers.org/phytozome.locus/"
   },
 
   // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000335
@@ -362,6 +583,13 @@
     "prefix": "http://identifiers.org/pombase/"
   },
 
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000702
+  "RAP-DB": {
+    "label": "Rice Annotation Project Database",
+    "class": "RAP-DB",
+    "prefix": "http://identifiers.org/rapdb.locus/"
+  },
+
   // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000047
   "RGD": {
     "label": "Rat Genome Database", 
@@ -369,11 +597,39 @@
     "prefix": "http://identifiers.org/rgd/"
   },
 
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000409
+  "RFAM": {
+    "label": "RNA families database of alignments and CMs", 
+    "class": "RFAM",
+    "prefix": "http://identifiers.org/rfam/"
+  },
+
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000552
+  "SEED": {
+    "label": "The SEED Database", 
+    "class": "SEED",
+    "prefix": "http://identifiers.org/seed/"
+  },
+
   // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000023
   "SGD": {
     "label": "Saccharomyces Genome Database", 
     "class": "SGD",
     "prefix": "http://identifiers.org/sgd/"
+  },
+
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000185
+  "SGN": {
+      "label": "SOL Genomics Network",
+      "class": "SGN",
+      "prefix": "http://identifiers.org/sgn/"
+  },
+
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000291
+  "SoyBase": {
+    "label": "Glycine max Genome Database",
+    "class": "SoyBase",
+    "prefix": "http://identifiers.org/soybase/"
   },
 
   // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000433
@@ -388,6 +644,55 @@
     "label": "The Arabidopsis Information Resource", 
     "class": "TAIR",
     "prefix": "http://identifiers.org/tair.locus/"
+  },
+
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000216
+  "TubercuList": {
+      "label": "TubercuList knowledge base",
+      "class": "TubercuList",
+      "prefix": "http://identifiers.org/myco.tuber/"
+  },
+
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000352
+  "UNITE": {
+      "label": "Molecular database for the identification of fungi",
+      "class": "UNITE",
+      "prefix": "http://identifiers.org/unite/"
+  },
+
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000232
+  "VectorBase": {
+    "label": "Bioinformatics Resource Center for Invertebrate Vectors of Human Pathogens",
+    "class": "VectorBase",
+    "prefix": "http://identifiers.org/vectorbase/"
+  },
+
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000407
+  "ViPR": {
+    "label": "Virus Pathogen Resource",
+    "class": "ViPR",
+    "prefix": "http://identifiers.org/vipr/"
+  },
+
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000027
+  "WormBase": {
+    "label": "Caenorhabditis elegans Genome Database",
+    "class": "WormBase",
+    "prefix": "http://identifiers.org/wb/"
+  },
+
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000186
+  "Xenbase": {
+    "label": "Xenopus laevis and tropicalis biology and genomics resource",
+    "class": "Xenbase",
+    "prefix": "http://identifiers.org/xenbase/"
+  },
+
+  // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000079
+  "ZFIN": {
+    "label": "Zebrafish Information Network",
+    "class": "ZFIN",
+    "prefix": "http://identifiers.org/zfin/"
   }
 }
 
