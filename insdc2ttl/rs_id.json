@@ -263,7 +263,7 @@
 
   "IMGT/GENE-DB": {
     "label": "Immunogenetics database, immunoglobulin and T-cell receptor genes",  // custom
-    "class": "IMGT/GENE-DB",
+    "class": "GENE-DB",
     "prefix": "http://identifiers.org/imgt.gene-db"
   },
 
@@ -376,7 +376,7 @@
   // http://www.ebi.ac.uk/miriam/main/collections/MIR:00000282
   "AceView/WormGenes": {
     "label": "AceView Worm Genome", 
-    "class": "AceView/WormGenes",
+    "class": "WormGenes",
     "prefix": "http://identifiers.org/aceview.worm/"
   },
 
@@ -509,14 +509,14 @@
   // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000287
   "IMGT/LIGM": {
     "label": "Immunogenetics database, immunoglobulins and T-cell receptors", 
-    "class": "IMGT/LIGM",
+    "class": "LIGM",
     "prefix": "http://identifiers.org/imgt.ligm/"
   },
 
   // http://www.ebi.ac.uk/miriam/cura/collections/MIR:00000331
   "IMGT/HLA": {
     "label": "Immunogenetics database, human MHC", 
-    "class": "IMGT/HLA",
+    "class": "HLA",
     "prefix": "http://identifiers.org/imgt.hla/"
   },
 
